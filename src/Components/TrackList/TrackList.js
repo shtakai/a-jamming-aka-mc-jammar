@@ -6,7 +6,6 @@ import './TrackList.css';
 
 class TrackList extends Component {
   render() {
-    console.log(this.props)
     return(
       <div className="TrackList">
         {
@@ -14,6 +13,8 @@ class TrackList extends Component {
             <Track
               key={track.id}
               track={track}
+              onAdd={this.props.onAdd}
+              isRemovable={this.props.isRemovable}
             />
           ))
         }

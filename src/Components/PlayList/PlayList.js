@@ -5,14 +5,15 @@ import TrackList from '../TrackList/TrackList';
 import './PlayList.css';
 
 class PlayList extends Component {
-  defaultValue = `New PlayList`;
-
   render() {
+    // const playListName = this.props.playListName === undefined ?
+    //   this.defaultValue :
+    //   this.props.playListName
 
     return (
       <div className="Playlist">
-        <input value={this.defaultValue}/>
-        <TrackList tracks={[]}/>
+        <input defaultValue={`New PlayList`}/>
+        <TrackList tracks={this.props.playListTracks} isRemovable={true} />
         <a className="Playlist-save">SAVE TO SPOTIFY</a>
       </div>
     )

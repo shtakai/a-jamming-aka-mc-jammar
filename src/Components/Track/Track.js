@@ -7,15 +7,21 @@ class Track extends Component {
     super(props);
 
     this.state = {
-      isRemoval: true,
+      isRemovable: this.props.isRemovable,
     };
 
     this.renderAction = this.renderAction.bind(this);
+    this.addTrack = this.addTrack.bind(this);
   }
 
   renderAction() {
-    console.log(this.state.isRemoval ? `+` : `-`)
-    return this.state.isRemoval ? `+` : `-`;
+    return this.state.isRemovable ?
+      <div>-</div> :
+      <div onClick={this.addTrack}>+</div> ;
+  }
+
+  addTrack() {
+    console.log(`addtrack: ${this.props.track.id}`)
   }
 
   render() {
