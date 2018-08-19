@@ -6,11 +6,17 @@ import './TrackList.css';
 
 class TrackList extends Component {
   render() {
+    console.log(this.props)
     return(
       <div className="TrackList">
-        <Track />
-        <Track />
-        <Track />
+        {
+          this.props.tracks.map(track => (
+            <Track
+              key={track.id}
+              track={track}
+            />
+          ))
+        }
       </div>
     )
   }
