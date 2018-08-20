@@ -45,6 +45,11 @@ class App extends Component {
 
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlayList = this.updatePlayList.bind(this);
+  }
+
+  updatePlayList(name) {
+    console.log(`updatePlayList:${name}`);
   }
 
   addTrack(track) {
@@ -75,7 +80,12 @@ class App extends Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-            <PlayList playListName={this.state.playListName} playListTracks={this.state.playListTracks} onRemove={this.removeTrack}/>
+            <PlayList
+              playListName={this.state.playListName}
+              playListTracks={this.state.playListTracks}
+              onRemove={this.removeTrack}
+              onNameChange={this.updatePlayList}
+            />
           </div>
         </div>
       </div>
