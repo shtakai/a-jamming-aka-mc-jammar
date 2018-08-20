@@ -46,10 +46,15 @@ class App extends Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlayList = this.updatePlayList.bind(this);
+    this.savePlayList = this.savePlayList.bind(this);
   }
 
   updatePlayList(name) {
     console.log(`updatePlayList:${name}`);
+  }
+
+  savePlayList() {
+    console.log(`savePlayList`)
   }
 
   addTrack(track) {
@@ -85,6 +90,7 @@ class App extends Component {
               playListTracks={this.state.playListTracks}
               onRemove={this.removeTrack}
               onNameChange={this.updatePlayList}
+              onSave={this.savePlayList}
             />
           </div>
         </div>
