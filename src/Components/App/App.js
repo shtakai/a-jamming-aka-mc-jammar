@@ -44,9 +44,11 @@ class App extends Component {
     };
 
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
   }
 
   addTrack(track) {
+    console.log(`addTrack:${track}`)
     // TODO more better way
     if (!this.state.playListTracks.find(savedTrack => (savedTrack.id === track.id))) {
       return;
@@ -59,8 +61,9 @@ class App extends Component {
   }
 
   removeTrack(track) {
+    console.log(`removeTrack:${track}`)
     const removeIdx =
-      this.state.playListTracks.findIndex(savedTrack => (savedTrack.id === track.id))
+      this.state.playListTracks.findIndex(savedTrack => (savedTrack.id === track))
     console.log(`removeIdx: ${removeIdx}`)
   }
 
@@ -72,7 +75,7 @@ class App extends Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-            <PlayList playListName={this.state.playListName} playListTracks={this.state.playListTracks}/>
+            <PlayList playListName={this.state.playListName} playListTracks={this.state.playListTracks} onRemove={this.removeTrack}/>
           </div>
         </div>
       </div>
