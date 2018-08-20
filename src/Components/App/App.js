@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import PlayList from '../PlayList/PlayList';
-
-
 import './App.css'
+
+import Spotify from '../../util/Spotify';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    console.log(`APPjs:spotify:${Spotify.getAccessToken()}`)
 
     this.state = {
       searchResults: [
@@ -47,6 +48,7 @@ class App extends Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlayList = this.updatePlayList.bind(this);
     this.savePlayList = this.savePlayList.bind(this);
+    this.search = this.search.bind(this);
   }
 
   updatePlayList(name) {
@@ -77,12 +79,16 @@ class App extends Component {
     console.log(`removeIdx: ${removeIdx}`)
   }
 
+  search(term) {
+    console.log(`search: term: ${term}`)
+  }
+
   render() {
     return(
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
-          <SearchBar />
+          <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
             <PlayList
