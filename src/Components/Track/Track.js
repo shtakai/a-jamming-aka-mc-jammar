@@ -22,19 +22,19 @@ class Track extends Component {
   }
 
   addTrack() {
-    this.props.onAdd(this.props.track.id)
+    this.props.onAdd(this.props.track.id);
   }
 
   removeTrack() {
-    this.props.onRemove(this.props.track.id)
+    this.props.onRemove(this.props.track.id);
   }
 
   render() {
     return (
       <div className="Track">
         <div className="Track-information">
-          <h3>{this.props.track.name} {this.props.track.id}</h3>
-          <p>{this.props.track.artist} | {this.props.track.album}</p>
+          <h3>{this.props.track.name.substr(0, 20)}</h3>
+          <p>{this.props.track.artist.substr(0, 15)} | {this.props.track.album.substr(0, 15)}</p>
         </div>
         <a className="Track-action">{this.renderAction()}</a>
       </div>
