@@ -1,0 +1,5 @@
+export const CLIENT_ID=`SPOTIFY_CLIENT_ID_FROM_DEV`;
+export const REDIRECT_URI = `http://localhost/`;
+
+
+

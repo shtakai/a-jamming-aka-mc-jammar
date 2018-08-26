@@ -12,21 +12,27 @@ class PlayList extends Component {
   }
 
   handleNameChange(e) {
-    console.log(`event:${e.target.value}`)
-    this.props.onNameChange(e.target.value)
-
+    this.props.onNameChange(e.target.value);
   }
 
   render() {
-    // const playListName = this.props.playListName === undefined ?
-    //   this.defaultValue :
-    //   this.props.playListName
-
     return (
       <div className="Playlist">
-        <input onChange={this.handleNameChange} defaultValue={`New PlayList`}/>
-        <TrackList tracks={this.props.playListTracks} isRemovable={true} onRemove={this.props.onRemove} />
-        <a className="Playlist-save">SAVE TO SPOTIFY</a>
+        <input
+          onChange={this.handleNameChange}
+          value={this.props.playListName}
+        />
+        <TrackList
+          tracks={this.props.playListTracks}
+          isRemovable={true}
+          onRemove={this.props.onRemove}
+        />
+        <a
+          onClick={this.props.onSave}
+          className="Playlist-save"
+        >
+          SAVE TO SPOTIFY
+        </a>
       </div>
     )
   }
