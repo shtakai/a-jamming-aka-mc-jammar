@@ -12,10 +12,11 @@ class SearchBar extends Component {
 
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
-  handleSearch() {
-    this.props.onSearch(this.state.searchTerm);
+  handleSearch(e) {
+    this.search();
   }
 
   handleChange(e) {
@@ -24,12 +25,23 @@ class SearchBar extends Component {
     });
   }
 
+  handleKeyUp(e) {
+    if (e.keyCode === 13) {
+      this.search();
+    }
+  }
+
+  search() {
+    this.props.onSearch(this.state.searchTerm);
+  }
+
   render() {
     return (
       <div className="SearchBar">
         <input
           placeholder="Enter A Song, Album, or Artist"
           onChange={this.handleChange}
+          onKeyUp={this.handleKeyUp}
         />
         <a onClick={this.handleSearch}>SEARCH</a>
       </div>
