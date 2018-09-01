@@ -32,6 +32,12 @@ class Track extends Component {
   render() {
     return (
       <div className="Track">
+        <div className="Track-image">
+          <img
+            src={this.props.track.imageUrl}
+            alt={this.props.track.album}
+          />
+        </div>
         <div className="Track-information">
           <h3>{this.props.track.name.substr(0, 20)}</h3>
           <p>{this.props.track.artist.substr(0, 15)} | {this.props.track.album.substr(0, 15)}</p>
