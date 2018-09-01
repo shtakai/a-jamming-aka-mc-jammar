@@ -14,14 +14,18 @@ class SearchBar extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSearch() {
-    this.props.onSearch(this.state.searchTerm);
+  handleSearch(e) {
+    this.search();
   }
 
   handleChange(e) {
     this.setState({
       searchTerm: e.target.value,
     });
+  }
+
+  search() {
+    this.props.onSearch(this.state.searchTerm);
   }
 
   render() {
