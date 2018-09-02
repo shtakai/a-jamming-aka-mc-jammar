@@ -6,10 +6,6 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      searchTerm: '',
-    }
-
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -20,9 +16,7 @@ class SearchBar extends Component {
   }
 
   handleChange(e) {
-    this.setState({
-      searchTerm: e.target.value,
-    });
+    this.props.updateSearchTerm(e.target.value);
   }
 
   handleKeyUp(e) {
@@ -32,7 +26,7 @@ class SearchBar extends Component {
   }
 
   search() {
-    this.props.onSearch(this.state.searchTerm);
+    this.props.onSearch(this.props.searchTerm);
   }
 
   render() {
@@ -42,6 +36,7 @@ class SearchBar extends Component {
           placeholder="Enter A Song, Album, or Artist"
           onChange={this.handleChange}
           onKeyUp={this.handleKeyUp}
+          value={this.props.searchTerm}
         />
         <a onClick={this.handleSearch}>SEARCH</a>
       </div>

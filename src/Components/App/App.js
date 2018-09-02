@@ -22,6 +22,7 @@ class App extends Component {
       playListTracks: [],
       isSavingPlayList: false,
       saveButtonContent: this.saveButtonContent.enable,
+      searchTerm: '',
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -29,6 +30,16 @@ class App extends Component {
     this.updatePlayList = this.updatePlayList.bind(this);
     this.savePlayList = this.savePlayList.bind(this);
     this.search = this.search.bind(this);
+    this.updateSearchTerm = this.updateSearchTerm.bind(this);
+  }
+
+  componentWillMount() {
+    const searchTerm = localStorage.getItem('searchTerm');
+    if (searchTerm) {
+      this.setState({
+        searchTerm: searchTerm,
+      })
+    }
   }
 
   updatePlayList(name) {
@@ -39,21 +50,30 @@ class App extends Component {
 
   async savePlayList() {
     const trackUris = this.state.playListTracks.map(_track => _track.uri);
+
     this.setState({
       isSavingPlayList: true,
       saveButtonContent: this.saveButtonContent.disable,
     });
+
     await Spotify.savePlayList(this.state.playListName, trackUris)
     // emulates dalay on communication to Spotify API.
     await this.timeout(5000);
+
     this.setState({
       playListTracks: [],
       saveButtonContent: this.saveButtonContent.enable,
     });
+
     this.updatePlayList('My playlist');
+
     this.setState({
       isSavingPlayList: false,
+      searchTerm: '',
     });
+
+    localStorage.removeItem('searchTerm');
+
   }
 
   addTrack(track) {
@@ -79,8 +99,8 @@ class App extends Component {
     });
   }
 
-  search(term) {
-    Spotify.search(term).then(results => {
+  search(searchTerm) {
+    Spotify.search(searchTerm).then(results => {
       this.setState({searchResults: results});
     });
   }
@@ -89,12 +109,23 @@ class App extends Component {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  updateSearchTerm(searchTerm) {
+    this.setState({
+      searchTerm: searchTerm,
+    });
+    localStorage.setItem('searchTerm', searchTerm);
+  }
+
   render() {
     return(
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
-          <SearchBar onSearch={this.search} />
+          <SearchBar
+            onSearch={this.search}
+            searchTerm={this.state.searchTerm || ''}
+            updateSearchTerm={this.updateSearchTerm}
+          />
           <div className="App-playlist">
             <SearchResults
               searchResults={this.state.searchResults}
