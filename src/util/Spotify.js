@@ -2,19 +2,33 @@ import { CLIENT_ID, REDIRECT_URI } from './config';
 
 let accessToken;
 let expiresIn;
+const DEFAULT_EXPIRES_IN = 10; // spotify's default expires_in(an hour)
+const EXPIRES_AT = 'expires_at'; // key of expires_at for sessionStorage
 
 const Spotify = {
   getAccessToken() {
-    if (accessToken) {
+    // FIXME MORE ELEGANT WAY.
+    const { matchToken, matchExpire } = getTokenAndExpire();
+    expiresIn = matchExpire ? matchExpire[1] : null;
+    expiresIn = expiresIn || DEFAULT_EXPIRES_IN;
+
+    let expiresAt = sessionStorage.getItem(EXPIRES_AT);
+    if (!expiresAt) {
+      expiresAt = Date.now() + Number(expiresIn) * 1000;
+      sessionStorage.setItem(EXPIRES_AT, expiresAt);
+    }
+
+    if (Date.now() > expiresAt) {
+      sessionStorage.removeItem(EXPIRES_AT);
+    }
+
+    if (accessToken && (Date.now() < expiresAt)) {
       return accessToken;
     }
 
-    const { matchToken, matchExpire } = getTokenAndExpire()
     accessToken = matchToken ? matchToken[1] : null;
-    expiresIn = matchExpire ? matchExpire[1] : null;
 
-    if (accessToken && expiresIn) {
-      window.setTimeout(() => accessToken = '', Number(expiresIn) * 1000);
+    if (accessToken) {
       window.history.pushState('Access Token', null, '/');
       return accessToken;
     }
