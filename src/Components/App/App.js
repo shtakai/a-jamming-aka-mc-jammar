@@ -8,6 +8,11 @@ import './App.css';
 import Spotify from '../../util/Spotify';
 
 class App extends Component {
+  saveButtonContent = {
+    enable: 'SAVE TO SPOTIFY',
+    disable: 'SAVING TO SPOTIFY',
+  };
+
   constructor(props) {
     super(props);
 
@@ -15,6 +20,8 @@ class App extends Component {
       searchResults: [],
       playListName: 'My playlist',
       playListTracks: [],
+      isSavingPlayList: false,
+      saveButtonContent: this.saveButtonContent.enable,
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -30,13 +37,23 @@ class App extends Component {
     });
   }
 
-  savePlayList() {
+  async savePlayList() {
     const trackUris = this.state.playListTracks.map(_track => _track.uri);
-    Spotify.savePlayList(this.state.playListName, trackUris);
+    this.setState({
+      isSavingPlayList: true,
+      saveButtonContent: this.saveButtonContent.disable,
+    });
+    await Spotify.savePlayList(this.state.playListName, trackUris)
+    // emulates dalay on communication to Spotify API.
+    await this.timeout(5000);
     this.setState({
       playListTracks: [],
+      saveButtonContent: this.saveButtonContent.enable,
     });
     this.updatePlayList('My playlist');
+    this.setState({
+      isSavingPlayList: false,
+    });
   }
 
   addTrack(track) {
@@ -68,6 +85,10 @@ class App extends Component {
     });
   }
 
+  timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   render() {
     return(
       <div>
@@ -85,6 +106,8 @@ class App extends Component {
               onRemove={this.removeTrack}
               onNameChange={this.updatePlayList}
               onSave={this.savePlayList}
+              isSavingPlayList={this.state.isSavingPlayList}
+              saveButtonContent={this.state.saveButtonContent}
             />
           </div>
         </div>

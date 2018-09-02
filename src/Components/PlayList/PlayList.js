@@ -29,9 +29,13 @@ class PlayList extends Component {
         />
         <a
           onClick={this.props.onSave}
-          className="Playlist-save"
+          className={
+            this.props.isSavingPlayList ?
+              'Playlist-save-disable' :
+              "Playlist-save"
+          }
         >
-          SAVE TO SPOTIFY
+          {this.props.saveButtonContent}
         </a>
       </div>
     )
