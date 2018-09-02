@@ -8,6 +8,10 @@ import './App.css';
 import Spotify from '../../util/Spotify';
 
 class App extends Component {
+  saveButtonContent = {
+    enable: 'SAVE TO SPOTIFY',
+    disable: 'SAVING TO SPOTIFY',
+  };
   constructor(props) {
     super(props);
 
