@@ -2,7 +2,7 @@ import { CLIENT_ID, REDIRECT_URI } from './config';
 
 let accessToken;
 let expiresIn;
-const DEFAULT_EXPIRES_IN = 10; // spotify's default expires_in(an hour)
+const DEFAULT_EXPIRES_IN = 3600; // spotify's default expires_in(an hour)
 const EXPIRES_AT = 'expires_at'; // key of expires_at for sessionStorage
 
 const Spotify = {
