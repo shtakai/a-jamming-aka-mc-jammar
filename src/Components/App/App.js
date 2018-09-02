@@ -72,6 +72,10 @@ class App extends Component {
     });
   }
 
+  timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   render() {
     return(
       <div>
