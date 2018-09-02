@@ -12,6 +12,7 @@ class App extends Component {
     enable: 'SAVE TO SPOTIFY',
     disable: 'SAVING TO SPOTIFY',
   };
+
   constructor(props) {
     super(props);
 
@@ -20,6 +21,7 @@ class App extends Component {
       playListName: 'My playlist',
       playListTracks: [],
       isSavingPlayList: false,
+      saveButtonContent: this.saveButtonContent.enable,
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -39,12 +41,14 @@ class App extends Component {
     const trackUris = this.state.playListTracks.map(_track => _track.uri);
     this.setState({
       isSavingPlayList: true,
+      saveButtonContent: this.saveButtonContent.disable,
     });
     await Spotify.savePlayList(this.state.playListName, trackUris)
     // emulates dalay on communication to Spotify API.
     await this.timeout(5000);
     this.setState({
       playListTracks: [],
+      saveButtonContent: this.saveButtonContent.enable,
     });
     this.updatePlayList('My playlist');
     this.setState({
@@ -103,6 +107,7 @@ class App extends Component {
               onNameChange={this.updatePlayList}
               onSave={this.savePlayList}
               isSavingPlayList={this.state.isSavingPlayList}
+              saveButtonContent={this.state.saveButtonContent}
             />
           </div>
         </div>

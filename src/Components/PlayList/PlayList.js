@@ -35,7 +35,7 @@ class PlayList extends Component {
               "Playlist-save"
           }
         >
-          SAVE TO SPOTIFY
+          {this.props.saveButtonContent}
         </a>
       </div>
     )
