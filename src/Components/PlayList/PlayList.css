@@ -37,6 +37,19 @@
   background-color: rgba(108, 65, 233, .7);
 }
 
+.Playlist-save-disable {
+  pointer-events: none;
+  cursor: pointer;
+  width: 10rem;
+  padding: .77rem 0;
+  border-radius: 54px;
+  margin-top: 1.27rem;
+  background-color: #aabbdd;
+  text-align: center;
+  font-size: .83rem;
+  transition: background-color .25s;
+}
+
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
