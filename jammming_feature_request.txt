@@ -1,0 +1,21 @@
+Now Jamming gives users functions as following with Spotify.
+
+Current Jamming Features:
+- Login with Spotify.
+- Search songs and display search results.
+- Select songs from search result to new playlist.
+- Remove songs from candidate songs on new playlist.
+- Save to new playlist to Spotify.
+
+To improve usability, these key features are nessesary to next release.
+
+New Key Jammming Features:
+This feature accomplishes the following:
+- Pressing enter triggers a search
+- Include preview samples for each track
+- Only display songs not currently present in the playlist in the search results
+- Add an interactive action while playlist is saving
+- Update the access token logic to expire at exactly the right time, instead of setting expiration from when the user initiates their next search
+- After user redirect on login, restoring the search term from before the redirect
+
+How it works and implements are on Issues.
