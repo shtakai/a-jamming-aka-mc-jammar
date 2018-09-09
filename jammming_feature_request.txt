@@ -1,1 +1,5 @@
+- DOCUMENT
 https://docs.google.com/document/d/1aT1thJKGvV0y_TAkUcPgKK9u2MSFQaLt_VQKfuCyO2Q/edit
+
+- URL
+https://osashimi-tabetaina.surge.sh/
